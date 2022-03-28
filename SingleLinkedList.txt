@@ -1,0 +1,145 @@
+template<class T>
+class ListNode {
+public:
+	T Data;
+	ListNode<T> *Next;
+	ListNode(T element)
+	{
+		Data = element;
+		Next = NULL;
+	}
+};
+template<class T>
+class SingleLinkedList {
+private:
+	ListNode<T> *First;
+	int length;
+public:
+	SingleLinkedList(T element)
+	{	
+		First = new ListNode<T>(element);
+		First->Next = NULL;
+		length = 1;
+	}
+	int getlength()
+	{
+		return length;
+	}
+	ListNode<T>* firstadress()
+	{
+		return First;
+	}
+	void Push_head(T element);
+	void Push_back(T element);
+	void Pop_head();
+	void Pop_back();
+	void delete_pos(int pos);
+	void Invert_pos(T val, int pos);
+	void Show();
+	void Connecting_Both_Ends();//使该链表首尾相连形成闭合环
+	void Show_byrange(int range);
+	friend void Josephus_fx(const int &num, SingleLinkedList<T> &x);
+};
+template<class T>
+void SingleLinkedList<T>::Invert_pos(T val, int pos)
+{
+	if (pos<0 || pos>length ||length<2 )
+	{
+		cout << "fault!";
+		return;
+	}
+	ListNode<T> *newNode = new ListNode<T>(val);
+	ListNode<T> *current = First;
+	for (int i = 0; i < pos-1; i++)
+	{
+		current = current->Next;
+	}
+	newNode->Next = current->Next;
+	current->Next = newNode;
+}
+template<class T>
+void SingleLinkedList<T>::delete_pos(int pos)
+{
+	if (pos<0 || pos>length)
+		return;
+	ListNode<T> *current = First,*p;
+	for (int i = 0; i < pos; i++)
+	{
+		current = current->Next;
+	}
+	*p = current->Next;
+	current->Next = *p->Next;
+	delete p;
+	length--;
+}
+template<class T>
+void SingleLinkedList<T>::Push_head(T element)
+{
+	ListNode<T> *NEW = new ListNode<T>(element);
+	NEW->Next = First->Next;
+	First = NEW;
+	length++;
+}
+template<class T>
+void SingleLinkedList<T>::Push_back(T element)
+{
+	ListNode<T> *NEW = new ListNode<T>(element);
+	ListNode<T> *current = First;
+	while (current->Next != NULL)
+	{
+		current = current->Next;
+	}
+	current->Next = NEW;
+	length++;
+}
+template<class T>
+void SingleLinkedList<T>::Pop_back()
+{
+	ListNode<T> *current = First;
+	while (current->Next != NULL)
+	{
+		current = current->Next;
+	}
+	delete current;
+	length--;
+}
+
+template<class T>
+void SingleLinkedList<T>::Pop_head()
+{
+	ListNode *p = First->Next;
+	delete First;
+	First = p;
+	length--;
+}
+template<class T>
+void SingleLinkedList<T>::Show()
+{
+	ListNode<T>*p = First;
+	while (p != NULL)
+	{
+		cout << p->Data ;
+		cout << "↓" << endl;
+		p = p->Next;
+	}
+}
+template<class T>
+void SingleLinkedList<T>::Connecting_Both_Ends()
+{
+	ListNode<T> *current = First;
+	while (current->Next != NULL)
+	{
+		current = current->Next;
+	}
+	current->Next = First;
+}
+template<class T>
+void SingleLinkedList<T>::Show_byrange(int range)
+{
+	ListNode<T> *p = First;
+	while (range)
+	{
+		cout << p->Data;
+		range--;
+	}
+}
