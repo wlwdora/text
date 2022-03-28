@@ -1,4 +1,4 @@
-template<class T>
+template<class T>//不加判断语句都是耍流氓
 class ListNode {
 public:
 	T Data;
