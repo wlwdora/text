@@ -39,7 +39,7 @@ public:
 	void Connecting_Both_Ends();//使该链表首尾相连形成闭合环
 	void Show_byrange(int range);
 	friend void Josephus_fx(const int &num, SingleLinkedList<T> &x);
-bool Isempty();
+bool Isempty();//思考如果缺少判断函数是否会造成野指针问题
 };
 template<class T>
 void SingleLinkedList<T>::Invert_pos(T val, int pos)
