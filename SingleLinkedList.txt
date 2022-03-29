@@ -39,6 +39,7 @@ public:
 	void Connecting_Both_Ends();//使该链表首尾相连形成闭合环
 	void Show_byrange(int range);
 	friend void Josephus_fx(const int &num, SingleLinkedList<T> &x);
+bool Isempty();
 };
 template<class T>
 void SingleLinkedList<T>::Invert_pos(T val, int pos)
@@ -142,4 +143,10 @@ void SingleLinkedList<T>::Show_byrange(int range)
 		cout << p->Data;
 		range--;
 	}
+}
+
+template<class T>
+bool SingleLinkedList<T>::Isempty()
+{
+return (length==0);
 }
